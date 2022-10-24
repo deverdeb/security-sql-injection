@@ -1,0 +1,35 @@
+{{ $badge_style := "" }}
+{{ $card_icon := "" }}
+{{if eq .Priority "Urgent" }}
+{{ $badge_style = "bg-danger" }}
+{{ $card_icon = "bi bi-chevron-double-up" }}
+{{else if eq .Priority "Normal" }}
+{{ $badge_style = "bg-primary" }}
+{{ $card_icon = "bi bi-chevron-up" }}
+{{else if eq .Priority "Basse" }}
+{{ $badge_style = "bg-light text-dark" }}
+{{ $card_icon = "bi bi-chevron-down" }}
+{{end}}
+
+<div class="card text-start md-3">
+    <h5 class="card-body">
+        <h5 class="card-title">
+            <span class="badge {{$badge_style}}"><i class="{{$card_icon}}"></i></span> {{.Name}}
+        </h5>
+        <p class="card-text">
+            {{.Description}}
+        </p>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-text">
+                    <small class="text-muted">{{.Status}} {{if .Archived}}<i class="bi bi-file-earmark-zip"></i>{{end}}</small>
+                </span>
+                <div class="d-flex btn-group">
+                    <a href="task?id={{.Id}}" class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></a>
+                    <a href="task?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Edit"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<br/>

@@ -1,0 +1,39 @@
+{{template "zz-header.html"}}
+<main class="form-task container text-start w-400 m-auto">
+    <form action="task?id={{ .Task.Id }}" method="post">
+        <h1 class="h3 mb-3 fw-normal">Task</h1>
+
+        <div class="mb-3">
+            <label class="form-label" for="Name">Name</label>
+            <input class="form-control" type="text" id="Name" name="Name" placeholder="Name" value="{{ .Task.Name }}"
+                   maxlength="60"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Description">Description</label>
+            <textarea class="form-control" id="Description" name="Description" placeholder="Description" rows="3" maxlength="250">{{ .Task.Description }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Priority">Priority</label>
+            <input class="form-control" type="text" id="Priority" name="Priority" placeholder="Priority" value="{{ .Task.Priority }}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="Status">Status</label>
+            <input class="form-control" type="text" id="Status" name="Status" placeholder="Status" value="{{ .Task.Status }}"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-check-label" for="Archived">Archived</label>
+            <input class="form-check-input" type="checkbox" value="true" id="Archived" name="Archived" {{if .Task.Archived}}checked{{end}}/>
+        </div>
+        <div class="mb-3">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <button class="btn btn-lg btn-primary" type="submit">Save</button>
+                    <div class="d-flex">
+                        <a class="btn btn-link " href="/index">Cancel</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </form>
+</main>
+{{template "zz-footer.html"}}
