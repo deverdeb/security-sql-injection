@@ -1,20 +1,27 @@
 {{ $badge_style := "" }}
 {{ $card_icon := "" }}
-{{if eq .Priority "Urgent" }}
+
+{{if eq .Priority "Highest" }}
 {{ $badge_style = "bg-danger" }}
 {{ $card_icon = "bi bi-chevron-double-up" }}
-{{else if eq .Priority "Normal" }}
-{{ $badge_style = "bg-primary" }}
+{{end}}{{if eq .Priority "High" }}
+{{ $badge_style = "bg-danger" }}
 {{ $card_icon = "bi bi-chevron-up" }}
-{{else if eq .Priority "Basse" }}
+{{end}}{{if eq .Priority "Medium" }}
+{{ $badge_style = "bg-primary" }}
+{{ $card_icon = "bi bi-chevron-expand" }}
+{{end}}{{if eq .Priority "Low" }}
 {{ $badge_style = "bg-light text-dark" }}
 {{ $card_icon = "bi bi-chevron-down" }}
+{{end}}{{if eq .Priority "Lowest" }}
+{{ $badge_style = "bg-light text-dark" }}
+{{ $card_icon = "bi bi-chevron-double-down" }}
 {{end}}
 
 <div class="card text-start md-3">
-    <h5 class="card-body">
+    <div class="card-body">
         <h5 class="card-title">
-            <span class="badge {{$badge_style}}"><i class="{{$card_icon}}"></i></span> {{.Name}}
+            <span class="badge {{$badge_style}}" title="{{.Priority}}"><i class="{{$card_icon}}"></i></span> {{.Name}}
         </h5>
         <p class="card-text">
             {{.Description}}

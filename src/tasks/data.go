@@ -3,27 +3,30 @@ package tasks
 type Priority string
 
 const (
-    Urgent Priority = "Urgent"
-    Normal Priority = "Normal"
-    Basse  Priority = "Basse"
+	Highest Priority = "Highest"
+	High    Priority = "High"
+	Medium  Priority = "Medium"
+	Low     Priority = "Low"
+	Lowest  Priority = "Lowest"
 )
 
 type Status string
 
 const (
-    EnAttente  Status = "EnAttente"
-    AFaire     Status = "AFaire"
-    EnCours    Status = "EnCours"
-    Terminee   Status = "Terminee"
-    Abandonnee Status = "Abandonnee"
+	Draft      Status = "Draft"
+	Open       Status = "Open"
+	InProgress Status = "InProgress"
+	Done       Status = "Done"
+	Closed     Status = "Closed"
+	Abandoned  Status = "Abandoned"
 )
 
 type Task struct {
-    Id          int64
-    UserId      int64
-    Name        string
-    Description string
-    Priority    Priority
-    Status      Status
-    Archived    bool
+	Id          int64
+	UserId      int64
+	Name        string
+	Description string
+	Priority    Priority
+	Status      Status
+	Archived    bool
 }
