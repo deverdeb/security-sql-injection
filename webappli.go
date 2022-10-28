@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
 	"log"
 	"math/rand"
 	"net/http"
@@ -26,18 +27,21 @@ func main() {
 	insertTasks()
 
 	// Créer les routes vers les pages
-	http.HandleFunc("/index", web.IndexPage)
-	http.HandleFunc("/login", web.LoginPage)
-	http.HandleFunc("/search", web.SearchPage)
-	http.HandleFunc("/task", web.TaskPage)
-	http.HandleFunc("/logout", web.LogoutPage)
+	router := mux.NewRouter()
 
 	// Ajoutes les ressources statiques
-	http.Handle("/", web.BuildHttpStaticHandler("index"))
+	router.HandleFunc("/", web.IndexPage)
+	router.HandleFunc("/index", web.IndexPage)
+	router.HandleFunc("/login", web.LoginPage)
+	router.HandleFunc("/search", web.SearchPage)
+	router.HandleFunc("/task", web.TaskPage)
+	router.HandleFunc("/logout", web.LogoutPage)
+	router.PathPrefix("/").Handler(web.BuildHttpStaticHandler())
 
 	// Lancer le serveur
 	log.Printf("Start web-appli on port %d", port)
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	server := http.Server{Addr: fmt.Sprintf(":%d", port), Handler: router}
+	err := server.ListenAndServe()
 	if err != nil {
 		log.Fatalf("web-appli execution failed: %v", err)
 	}

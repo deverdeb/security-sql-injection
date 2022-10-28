@@ -3,7 +3,7 @@ package users
 import (
 	"crypto/md5"
 	"database/sql"
-	"encoding/base64"
+	"encoding/hex"
 	"fmt"
 	"strings"
 	"web-appli/src/db"
@@ -85,6 +85,8 @@ func (dao UsersDao) extractResults(rows *sql.Rows) ([]*User, error) {
 }
 
 func (dao UsersDao) passwordHash(password string) string {
+	//hash := md5.Sum([]byte(password))
+	//return base64.StdEncoding.EncodeToString(hash[:])
 	hash := md5.Sum([]byte(password))
-	return base64.StdEncoding.EncodeToString(hash[:])
+	return hex.EncodeToString(hash[:])
 }

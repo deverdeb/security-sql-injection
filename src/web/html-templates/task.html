@@ -14,11 +14,24 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="Priority">Priority</label>
-            <input class="form-control" type="text" id="Priority" name="Priority" placeholder="Priority" value="{{ .Task.Priority }}"/>
+            <select class="form-select" id="Priority" name="Priority" placeholder="Priority">
+                <option value="Highest" {{if eq .Task.Priority "Highest" }}selected{{end}}>Highest</option>
+                <option value="High" {{if eq .Task.Priority "High" }}selected{{end}}>High</option>
+                <option value="Medium" {{if eq .Task.Priority "Medium" }}selected{{end}}>Medium</option>
+                <option value="Low" {{if eq .Task.Priority "Low" }}selected{{end}}>Low</option>
+                <option value="Lowest" {{if eq .Task.Priority "Lowest" }}selected{{end}}>Lowest</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label" for="Status">Status</label>
-            <input class="form-control" type="text" id="Status" name="Status" placeholder="Status" value="{{ .Task.Status }}"/>
+            <select class="form-select" id="Status" name="Status" placeholder="Status">
+                <option value="Highest" {{if eq .Task.Status "Draft" }}selected{{end}}>Draft</option>
+                <option value="Open" {{if eq .Task.Status "High" }}selected{{end}}>Open</option>
+                <option value="InProgress" {{if eq .Task.Status "Medium" }}selected{{end}}>In progress</option>
+                <option value="Done" {{if eq .Task.Status "Low" }}selected{{end}}>Done</option>
+                <option value="Closed" {{if eq .Task.Status "Lowest" }}selected{{end}}>Closed</option>
+                <option value="Abandoned" {{if eq .Task.Status "Lowest" }}selected{{end}}>Abandoned</option>
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-check-label" for="Archived">Archived</label>

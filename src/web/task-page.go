@@ -38,7 +38,7 @@ func TaskPage(responseWriter http.ResponseWriter, httpRequest *http.Request) {
 			displayErrorPageFromError(responseWriter, err)
 		} else if task == nil {
 			// La tâche demandée n'existe pas, ce qui n'est pas cohérent
-			displayErrorPage(responseWriter, 404, "La ressource demandée n'existe pas ou n'est pas accessible")
+			displayErrorPage(responseWriter, 404, "Resource is not found or forbidden")
 		} else if httpRequest.Method == "POST" {
 			// Mise à jour d'une tâche
 			updateTask(task, responseWriter, httpRequest, user)
@@ -101,7 +101,7 @@ func deleteTask(task *tasks.Task, responseWriter http.ResponseWriter, httpReques
 	// Vérifier si nous avons le droit de supprimer la tâche
 	if task.UserId != user.Id {
 		// La tâche demandée n'appartient pas à l'utilisateur
-		displayErrorPage(responseWriter, 403, "La ressource demandée n'existe pas ou n'est pas accessible")
+		displayErrorPage(responseWriter, 403, "Resource is not found or forbidden")
 	}
 	// Supprimer la tâche
 	_ = tasks.Service.Delete(task)
