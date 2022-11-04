@@ -11,6 +11,8 @@ import (
 
 const RequestSelect = `SELECT id, firstname, lastname, login, isAdmin FROM users`
 const RequestCreate = `INSERT INTO users(firstname, lastname, login, password, isAdmin) VALUES (?, ?, ?, ?, ?)`
+const RequestUpdate = `UPDATE users SET firstname = ?, lastname = ?, isAdmin = ? WHERE id = ?`
+const RequestDelete = `DELETE FROM users WHERE id = ?`
 
 var Dao = UsersDao{}
 
@@ -23,8 +25,31 @@ func (dao UsersDao) Create(user *User, password string) (*User, error) {
 	return user, err
 }
 
+func (dao UsersDao) Update(user *User) error {
+	return db.Execute(RequestUpdate, user.Firstname, user.Lastname, user.IsAdmin, user.Id)
+}
+
+func (dao UsersDao) Delete(id int64) error {
+	return db.Execute(RequestDelete, id)
+}
+
 func (dao UsersDao) FindAll() ([]*User, error) {
 	return db.ExecuteQuery(dao.extractResults, RequestSelect)
+}
+
+func (dao UsersDao) FindById(id int64) (*User, error) {
+	users, err := db.ExecuteQuery(dao.extractResults, RequestSelect+" WHERE id = ?", id)
+	if err != nil {
+		// Erreur trouvée
+		return nil, err
+	} else if len(users) <= 0 {
+		// Utilisateur non trouvé
+		return nil, nil
+	} else {
+		// Utilisateur trouvé
+		result := users[0]
+		return result, nil
+	}
 }
 
 func (dao UsersDao) FindByLoginAndPassword(login, password string) (*User, error) {

@@ -33,3 +33,17 @@ func ExecuteCreate(sqlRequestTemplate string, args ...any) (int64, error) {
 	}
 	return result.LastInsertId()
 }
+
+// Execute function executes a SQL query on database.
+func Execute(sqlRequestTemplate string, args ...any) error {
+	conn := GetConnection()
+	statement, err := conn.Prepare(sqlRequestTemplate)
+	if err != nil {
+		return fmt.Errorf("query preparation failed: %s\nerror: %w", sqlRequestTemplate, err)
+	}
+	_, err = statement.Exec(args...)
+	if err != nil {
+		return fmt.Errorf("query execution failed: %s\nerror: %w", sqlRequestTemplate, err)
+	}
+	return nil
+}

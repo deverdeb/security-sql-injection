@@ -2,7 +2,9 @@
 <main class="w-400 m-auto">
     <p>
         <i class="bi bi-person-circle"></i>
-        {{ .User.Firstname }} {{ .User.Lastname }}
+        {{ .User.Firstname}} {{ .User.Lastname }}
+        <a class="btn btn-light btn-sm" href="/user?id={{ .User.Id }}" title="edit"><i class="bi bi-pencil"></i></a>
+        {{if .User.IsAdmin }}<a class="btn btn-light btn-sm" href="/users" title="all users"><i class="bi bi-people"></i></a>{{end}}
         <a class="btn btn-light btn-sm" href="/logout" title="logout"><i class="bi bi-box-arrow-right"></i></a>
     </p>
     <h1 class="h3 mb-3 fw-normal">

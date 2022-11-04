@@ -79,32 +79,16 @@ func updateTask(task *tasks.Task, responseWriter http.ResponseWriter, httpReques
 	// Vérifier si nous avons le droit de modifier la tâche
 	if task.UserId != user.Id {
 		// La tâche demandée n'appartient pas à l'utilisateur
-		displayErrorPage(responseWriter, 403, "La ressource demandée n'existe pas ou n'est pas accessible")
+		displayErrorPage(responseWriter, 403, "Resource is not found or forbidden")
 	}
 	// Extraire les champs du formulaire et compléter la tâche
 	task = completeTask(task, httpRequest)
 	// Sauver la tâche
 	task, err := tasks.Service.Save(task)
 	if err != nil {
-		log.Printf("[ERROR] failed to update task page: %v", err)
+		log.Printf("[ERROR] failed to update task: %v", err)
 		displayErrorPageFromError(responseWriter, err)
 	}
-	// Rediriger vers la page d'index
-	http.Redirect(
-		responseWriter, httpRequest,
-		"index",
-		http.StatusSeeOther,
-	)
-}
-
-func deleteTask(task *tasks.Task, responseWriter http.ResponseWriter, httpRequest *http.Request, user *users.User) {
-	// Vérifier si nous avons le droit de supprimer la tâche
-	if task.UserId != user.Id {
-		// La tâche demandée n'appartient pas à l'utilisateur
-		displayErrorPage(responseWriter, 403, "Resource is not found or forbidden")
-	}
-	// Supprimer la tâche
-	_ = tasks.Service.Delete(task)
 	// Rediriger vers la page d'index
 	http.Redirect(
 		responseWriter, httpRequest,
@@ -121,6 +105,22 @@ func completeTask(task *tasks.Task, httpRequest *http.Request) *tasks.Task {
 	task.Priority = tasks.Priority(httpRequest.FormValue("Priority"))
 	task.Archived = httpRequest.Form.Has("Archived")
 	return task
+}
+
+func deleteTask(task *tasks.Task, responseWriter http.ResponseWriter, httpRequest *http.Request, user *users.User) {
+	// Vérifier si nous avons le droit de supprimer la tâche
+	if task.UserId != user.Id {
+		// La tâche demandée n'appartient pas à l'utilisateur
+		displayErrorPage(responseWriter, 403, "Resource is not found or forbidden")
+	}
+	// Supprimer la tâche
+	_ = tasks.Service.Delete(task)
+	// Rediriger vers la page d'index
+	http.Redirect(
+		responseWriter, httpRequest,
+		"index",
+		http.StatusSeeOther,
+	)
 }
 
 // displayTaskPage est la fonction de rendu de la page d'édition des tâches

@@ -1,0 +1,30 @@
+{{ $badge_style := "bg-primary" }}
+{{ $card_icon := "bi bi-person" }}
+
+{{if .IsAdmin }}
+{{ $badge_style = "bg-danger" }}
+{{ $card_icon = "bi bi-person-circle" }}
+{{end}}
+
+<div class="card text-start md-3">
+    <div class="card-body">
+        <h5 class="card-title">
+            <span class="badge {{$badge_style}}"><i class="{{$card_icon}}"></i></span> {{.Login}}
+        </h5>
+        <p class="card-text">
+            {{.Firstname}} {{.Lastname}}
+        </p>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-text">
+                    <small class="text-muted">{{if .IsAdmin}}administrator{{end}}</small>
+                </span>
+                <div class="d-flex btn-group">
+                    <a href="user?id={{.Id}}" class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></a>
+                    <a href="user?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Remove"><i class="bi bi-trash"></i></a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<br/>
