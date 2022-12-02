@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Task list</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="/js/bootstrap.bundle.js"></script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body class="text-center">
+<main>
+    <header class="p-3 text-bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="/img/checklist.webp" alt="Task list logo" aria-label="Task list" role="img"
+                         width="40">
+                    <span class="fs-4 mx-1"> Task list </span>
+                </a>
+
+                {{ if (hasField "User" .) }}
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="/" class="nav-link px-2 text-white">Home</a></li>
+                        <li><a href="/tasks" class="nav-link px-2 text-white">Tasks</a></li>
+                        {{ if .User.IsAdmin }}
+                            <li><a href="/users" class="nav-link px-2 text-white">Users</a></li>
+                        {{end}}
+                        <li><a href="/about" class="nav-link px-2 text-white">About</a></li>
+                    </ul>
+
+                    <div class="text-end">
+                        <i class="bi bi-person-circle"></i>
+                        {{ .User.Firstname}} {{ .User.Lastname }}
+                        <a class="btn btn-light btn-sm" href="/user?id={{ .User.Id }}" title="edit">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="/logout" title="logout">
+                            <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </header>
+
+    <div class="container">

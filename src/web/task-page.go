@@ -125,7 +125,7 @@ func deleteTask(task *tasks.Task, responseWriter http.ResponseWriter, httpReques
 
 // displayTaskPage est la fonction de rendu de la page d'édition des tâches
 func displayTaskPage(responseWriter http.ResponseWriter, user *users.User, task *tasks.Task) {
-	err := htmlTemplates.ExecuteTemplate(responseWriter, "task.html", struct {
+	err := htmlTemplates.ExecuteTemplate(responseWriter, "task.gohtml", struct {
 		User *users.User
 		Task *tasks.Task
 	}{

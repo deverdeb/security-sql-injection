@@ -25,7 +25,7 @@ func UsersPage(responseWriter http.ResponseWriter, httpRequest *http.Request) {
 
 // displayUsersPage est la fonction de rendu de la page des utilisateurs
 func displayUsersPage(responseWriter http.ResponseWriter, user *users.User, userList []*users.User) {
-	err := htmlTemplates.ExecuteTemplate(responseWriter, "users.html", struct {
+	err := htmlTemplates.ExecuteTemplate(responseWriter, "users.gohtml", struct {
 		User  *users.User
 		Users []*users.User
 	}{

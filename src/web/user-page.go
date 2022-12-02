@@ -81,7 +81,7 @@ func deleteUser(editedUser *users.User, responseWriter http.ResponseWriter, http
 
 // displayUserPage est la fonction de rendu de la page d'édition des utilisateurs
 func displayUserPage(responseWriter http.ResponseWriter, user *users.User, editedUser *users.User) {
-	err := htmlTemplates.ExecuteTemplate(responseWriter, "user.html", struct {
+	err := htmlTemplates.ExecuteTemplate(responseWriter, "user.gohtml", struct {
 		User       *users.User
 		EditedUser *users.User
 	}{

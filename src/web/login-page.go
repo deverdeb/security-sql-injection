@@ -51,7 +51,7 @@ func checkAuthentication(responseWriter http.ResponseWriter, httpRequest *http.R
 }
 
 func displayLoginPage(responseWriter http.ResponseWriter, pageData loginPageData) {
-	err := htmlTemplates.ExecuteTemplate(responseWriter, "login.html", pageData)
+	err := htmlTemplates.ExecuteTemplate(responseWriter, "login.gohtml", pageData)
 	if err != nil {
 		log.Printf("[ERROR] failed to build login page: %v", err)
 		displayErrorPageFromError(responseWriter, err)

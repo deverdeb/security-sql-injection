@@ -1,0 +1,12 @@
+{{ template "zz-header.gohtml" . }}
+
+<h1 class="h3 mb-3 fw-normal">
+    <i class="bi bi-people"></i>
+    Users
+</h1>
+
+{{range .Users}}
+    {{template "widget-user-card.gohtml" .}}
+{{end}}
+
+{{template "zz-footer.gohtml"}}

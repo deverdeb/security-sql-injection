@@ -9,6 +9,7 @@ func InitializeRouter(router *mux.Router) {
 	router.HandleFunc("/index", IndexPage)
 	router.HandleFunc("/login", LoginPage)
 	router.HandleFunc("/search", SearchPage)
+	router.HandleFunc("/tasks", TasksPage)
 	router.HandleFunc("/task", TaskPage)
 	router.HandleFunc("/users", UsersPage)
 	router.HandleFunc("/user", UserPage)

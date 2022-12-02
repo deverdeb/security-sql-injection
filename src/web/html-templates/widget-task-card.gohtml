@@ -2,20 +2,20 @@
 {{ $card_icon := "" }}
 
 {{if eq .Priority "Highest" }}
-{{ $badge_style = "bg-danger" }}
-{{ $card_icon = "bi bi-chevron-double-up" }}
+    {{ $badge_style = "bg-danger" }}
+    {{ $card_icon = "bi bi-chevron-double-up" }}
 {{end}}{{if eq .Priority "High" }}
-{{ $badge_style = "bg-danger" }}
-{{ $card_icon = "bi bi-chevron-up" }}
+    {{ $badge_style = "bg-danger" }}
+    {{ $card_icon = "bi bi-chevron-up" }}
 {{end}}{{if eq .Priority "Medium" }}
-{{ $badge_style = "bg-primary" }}
-{{ $card_icon = "bi bi-chevron-expand" }}
+    {{ $badge_style = "bg-primary" }}
+    {{ $card_icon = "bi bi-chevron-expand" }}
 {{end}}{{if eq .Priority "Low" }}
-{{ $badge_style = "bg-light text-dark" }}
-{{ $card_icon = "bi bi-chevron-down" }}
+    {{ $badge_style = "bg-light text-dark" }}
+    {{ $card_icon = "bi bi-chevron-down" }}
 {{end}}{{if eq .Priority "Lowest" }}
-{{ $badge_style = "bg-light text-dark" }}
-{{ $card_icon = "bi bi-chevron-double-down" }}
+    {{ $badge_style = "bg-light text-dark" }}
+    {{ $card_icon = "bi bi-chevron-double-down" }}
 {{end}}
 
 <div class="card text-start md-3">
@@ -32,8 +32,12 @@
                     <small class="text-muted">{{.Status}} {{if .Archived}}<i class="bi bi-file-earmark-zip"></i>{{end}}</small>
                 </span>
                 <div class="d-flex btn-group">
-                    <a href="task?id={{.Id}}" class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></a>
-                    <a href="task?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Remove"><i class="bi bi-trash"></i></a>
+                    <a href="task?id={{.Id}}" class="btn btn-outline-primary" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a href="task?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Remove">
+                        <i class="bi bi-trash"></i>
+                    </a>
                 </div>
             </div>
         </nav>

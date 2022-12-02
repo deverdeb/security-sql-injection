@@ -7,8 +7,8 @@ import (
 	"web-appli/src/users"
 )
 
-// IndexPage est la fonction de rendu de la page d'index
-func IndexPage(responseWriter http.ResponseWriter, httpRequest *http.Request) {
+// TasksPage est la fonction de rendu de la page des tâches
+func TasksPage(responseWriter http.ResponseWriter, httpRequest *http.Request) {
 	Sessions.CheckAuthentication(responseWriter, httpRequest, func(user *users.User) {
 		taskList, err := tasks.Service.FindByUser(user)
 		if err != nil {
@@ -19,9 +19,9 @@ func IndexPage(responseWriter http.ResponseWriter, httpRequest *http.Request) {
 	})
 }
 
-// displayIndexPage est la fonction de rendu de la page d'index
-func displayIndexPage(responseWriter http.ResponseWriter, user *users.User, taskList []*tasks.Task, searchText string) {
-	err := htmlTemplates.ExecuteTemplate(responseWriter, "index.gohtml", struct {
+// displayTasksPage est la fonction de rendu de la page des tâches
+func displayTasksPage(responseWriter http.ResponseWriter, user *users.User, taskList []*tasks.Task, searchText string) {
+	err := htmlTemplates.ExecuteTemplate(responseWriter, "tasks.gohtml", struct {
 		User       *users.User
 		Tasks      []*tasks.Task
 		SearchText string

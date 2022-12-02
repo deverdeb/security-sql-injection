@@ -2,8 +2,8 @@
 {{ $card_icon := "bi bi-person" }}
 
 {{if .IsAdmin }}
-{{ $badge_style = "bg-danger" }}
-{{ $card_icon = "bi bi-person-circle" }}
+    {{ $badge_style = "bg-danger" }}
+    {{ $card_icon = "bi bi-person-circle" }}
 {{end}}
 
 <div class="card text-start md-3">
@@ -20,8 +20,12 @@
                     <small class="text-muted">{{if .IsAdmin}}administrator{{end}}</small>
                 </span>
                 <div class="d-flex btn-group">
-                    <a href="user?id={{.Id}}" class="btn btn-outline-primary" title="Edit"><i class="bi bi-pencil"></i></a>
-                    <a href="user?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Remove"><i class="bi bi-trash"></i></a>
+                    <a href="user?id={{.Id}}" class="btn btn-outline-primary" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    <a href="user?id={{.Id}}&action=delete" class="btn btn-outline-primary" title="Remove">
+                        <i class="bi bi-trash"></i>
+                    </a>
                 </div>
             </div>
         </nav>

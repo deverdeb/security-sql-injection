@@ -1,0 +1,36 @@
+{{ template "zz-header.gohtml" . }}
+
+<form action="user?id={{ .EditedUser.Id }}" method="post">
+    <h1 class="h3 mb-3 fw-normal">User {{ .EditedUser.Login }}</h1>
+
+    <div class="mb-3">
+        <label class="form-label" for="Firstname">Firstname</label>
+        <input class="form-control" type="text" id="Firstname" name="Firstname" placeholder="Firstname"
+               value="{{ .EditedUser.Firstname }}"
+               maxlength="60"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Lastname">Lastname</label>
+        <input class="form-control" type="text" id="Lastname" name="Lastname" placeholder="Lastname"
+               value="{{ .EditedUser.Lastname }}"
+               maxlength="60"/>
+    </div>
+    <div class="mb-3">
+        <!-- Faille ici : le disabled est côté client, pas côté serveur... -->
+        <label class="form-check-label" for="IsAdmin">Administrator</label>
+        <input class="form-check-input" type="checkbox" value="true" id="IsAdmin" name="IsAdmin"
+               {{if .EditedUser.IsAdmin}}checked{{end}} {{if not .User.IsAdmin}}disabled{{end}}/>
+    </div>
+    <div class="mb-3">
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <button class="btn btn-lg btn-primary" type="submit">Save</button>
+                <div class="d-flex">
+                    <a class="btn btn-link" href="/users">Cancel</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</form>
+
+{{template "zz-footer.gohtml"}}

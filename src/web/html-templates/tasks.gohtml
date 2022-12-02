@@ -1,0 +1,23 @@
+{{ template "zz-header.gohtml" . }}
+
+<h1 class="h3 mb-3 fw-normal">
+    <img src="/img/checklist.webp" alt="logo" width="7%">
+    Tasks
+    <a href="task" class="btn btn-outline-primary" title="Add"><i class="bi bi-plus-circle"></i></a>
+</h1>
+
+<form action="search" method="post">
+    <div class="input-group mb-3">
+        <input class="form-control" type="text" id="search" name="search" placeholder="search text"
+               aria-label="search text" aria-describedby="button-search" value="{{.SearchText}}"/>
+        <button class="btn btn-outline-secondary" type="submit" id="button-search" title="search">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+</form>
+
+{{range .Tasks}}
+{{template "widget-task-card.gohtml" .}}
+{{end}}
+
+{{template "zz-footer.gohtml"}}
